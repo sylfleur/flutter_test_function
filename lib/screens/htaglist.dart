@@ -11,27 +11,40 @@ class HtagList extends StatefulWidget {
 class _HtagListState extends State<HtagList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: users.length,
-      itemBuilder: (context, index) {
-        return Dismissible(
-            key: const Key(''),
-            onDismissed: (direction) =>
-                ScaffoldMessenger.of(context).showSnackBar(
+    return users.isEmpty
+        ? const Center(
+            child: Text('No users found'),
+          )
+        : ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                key: const Key(''),
+                onDismissed: (direction) =>
+                    ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(users[index]["name"].toString() + " Supprimé"),
+                    content:
+                        Text(users[index]["name"].toString() + " Supprimé"),
                   ),
                 ),
-            background: Container(
-              color: Colors.red,
-            ),
-            child: Card(
-              child: ListTile(
-                title: Text(users[index]["name"]),
-              ),
-            ));
-      },
-    );
+                background: Container(
+                  color: Colors.red,
+                ),
+                child: Card(
+                  child: ListTile(
+                    title: Text(
+                      users[index]["name"],
+                    ),
+                    subtitle: Text(
+                      users[index]["firstname"],
+                    ),onTap: (){
+                      
+                    },
+                  ),
+                ),
+              );
+            },
+          );
   }
 }
 
