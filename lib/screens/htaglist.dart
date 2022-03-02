@@ -37,8 +37,11 @@ class _HtagListState extends State<HtagList> {
                     ),
                     subtitle: Text(
                       users[index]["firstname"],
-                    ),onTap: (){
-                      
+                    ),
+                    onTap: () {
+                      setState(() {
+                        //PageController(initialPage: );
+                      });
                     },
                   ),
                 ),
