@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'userdatascreen.dart';
 //import 'package:http/http.dart' as http;
 
 class HtagList extends StatefulWidget {
@@ -18,6 +20,14 @@ class _HtagListState extends State<HtagList> {
         : ListView.builder(
             itemCount: users.length,
             itemBuilder: (context, index) {
+              void _sendDataUserToDataScreen(BuildContext context) {
+                int indexSent = index;
+                    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UserDataModal(index: indexSent,),
+        ));
+              }
               return Dismissible(
                 key: const Key(''),
                 onDismissed: (direction) =>
@@ -41,21 +51,18 @@ class _HtagListState extends State<HtagList> {
                     onTap: () {
                       setState(() {
                         //PageController(initialPage: );
+                        
                       });
                     },
+                    onLongPress: _sendDataUserToDataScreen(context),
                   ),
                 ),
               );
+              
             },
           );
-
-void _sendDataUserToDataScreen(BuildContext context){
-  int indexSent = 
-} 
   }
 }
-
-
 
 /* class User {
   final int id;
