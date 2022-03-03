@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'htaglist.dart';
 
-/* class UserDataModal extends StatefulWidget {
-  const UserDataModal({ Key? key }) : super(key: key);
+class UserDataModal extends StatefulWidget {
+  final int index; 
+  const UserDataModal({ Key? key, required this.index }) : super(key: key);
 
   @override
   State<UserDataModal> createState() => _UserDataModalState();
@@ -45,4 +46,4 @@ class _UserDataModalState extends State<UserDataModal> {
                           ],
                         );
   }
-} */
+}

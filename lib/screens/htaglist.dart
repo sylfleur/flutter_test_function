@@ -48,8 +48,14 @@ class _HtagListState extends State<HtagList> {
               );
             },
           );
+
+void _sendDataUserToDataScreen(BuildContext context){
+  int indexSent = 
+} 
   }
 }
+
+
 
 /* class User {
   final int id;
