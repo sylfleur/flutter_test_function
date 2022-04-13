@@ -1,140 +1,86 @@
-//ignore_for_file: prefer_const_constructors
+//ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:flutter_application_training/homepage.dart';
-import 'package:flutter_application_training/screens/lamp.dart';
-
-import 'screens/codelabs.dart';
-import 'screens/htaglist.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Icon> noteByIcon = [
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Les Widget Basics',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      debugShowCheckedModeBanner: false,
-      //home: MyHomePage(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomePage(),
-        '/lamp': (context) => LampOnOff(),
-        '/htag': (context) => HtagList(),
-        '/codelabs': (context) => FlutterCodeLabs(),
-      },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  late Widget myBody;
-
-  Widget htag() {
-    return HtagList();
-  }
-
-  Widget codelabs() {
-    return FlutterCodeLabs();
-  }
-
-  Widget lamp() {
-    return LampOnOff();
+        title: 'Les Widget Basics',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: Colors.black,
+          body: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Center(
+                      child: Text(
+                        'Flutter est un framework web permettant de réaliser des applications Android!',
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                _button('Vrai', Colors.green),
+                _button('Faux', Colors.red),
+                Row(
+                  children: noteByIcon,
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 
-  @override
-  void initState() {
-    super.initState();
-    myBody = MyBody();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    //var myBody = MyBody();
-    return Scaffold(
-      //backgroundColor: Colors.teal,
-      appBar: AppBar(
-        title: Text('App Bar'),
-        //leading: Icon(Icons.access_alarm),
-        actions: const [
-          Icon(Icons.account_circle),
-          Icon(Icons.support_agent),
-          Icon(Icons.mail_outline_rounded),
-        ],
-        elevation: 10.0,
-        centerTitle: true,
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            Container(
-              height: 50.0,
-              margin: EdgeInsets.only(top: 15.0),
-              child: Text('Menu'),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              trailing: Icon(Icons.play_arrow),
-              title: Text('Home'),
-              onTap: () {
-                setState(() {
-                  myBody = MyBody();
-                });
-                Navigator.pop(context);
-                //Navigator.pushNamed(context, "/");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              trailing: Icon(Icons.play_arrow),
-              title: Text('CodeLabs'),
-              onTap: () {
-                setState(() {
-                  myBody = codelabs();
-                });
-                Navigator.pop(context);
-                //Navigator.pushNamed(context, "/codelabs");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              trailing: Icon(Icons.play_arrow),
-              title: Text('ListView'),
-              onTap: () {
-                setState(() {
-                  myBody = htag();
-                });
-                Navigator.pop(context);
-                //Navigator.pushNamed(context, "/htag");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.light_mode),
-              trailing: Icon(Icons.play_arrow),
-              title: Text('On / Off'),
-              onTap: () {
-                setState(() {
-                  myBody = lamp();
-                });
-                Navigator.pop(context);
-                //Navigator.pushNamed(context, '/lamp');
-              },
-            ),
-          ],
+  _button(String s, MaterialColor couleur) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextButton(
+          onPressed: () {
+            if (s == 'Vrai') {
+              print('Vrai');
+            } else {
+              print('Faux');
+            }
+          },
+          child: Text(s),
+          style: ElevatedButton.styleFrom(
+            primary: couleur,
+            elevation: 5.0,
+          ),
         ),
       ),
-      body: myBody,
     );
   }
 }
